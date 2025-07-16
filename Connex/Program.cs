@@ -27,6 +27,17 @@ builder.Services.AddSingleton<IQrCodeGenerator, QrCodeGenerator>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.AddHttpClient<IEmailValidationService, EmailValidationService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy
+            .AllowAnyOrigin()       
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddSwaggerGen(swagger =>
 {
     swagger.SwaggerDoc("v1", new OpenApiInfo
@@ -98,6 +109,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AllowAll");
 
 app.UseAuthentication();
 
