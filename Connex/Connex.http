@@ -1,0 +1,6 @@
+@Connex_HostAddress = http://localhost:5120
+
+GET {{Connex_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
